@@ -1,5 +1,9 @@
 {
   "app_name": "Waste Classification",
+  "navigation": {
+    "home": "Home",
+    "history": "History"
+  },
   "common": {
     "back": "Back",
     "home": "Home",
@@ -52,6 +56,24 @@
     "confidence_value": "Confidence: {value}%",
     "scan_again": "Scan again",
     "back_home": "Back to home"
+  },
+  "history": {
+    "title": "History",
+    "statistics_title": "Classification statistics",
+    "scan_history_title": "Scan history",
+    "scan_count": "{count} scans",
+    "period_day": "Day",
+    "period_week": "Week",
+    "period_month": "Month",
+    "total_scans": "scans",
+    "no_period_data": "No scans in this period yet.",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "detail_title": "Scan details",
+    "scanned_at": "Scanned at",
+    "empty_title": "No scan history yet",
+    "empty_description": "Complete your first scan to start tracking your sorting habits.",
+    "load_error": "The scan history could not be loaded. Please try again."
   },
   "settings": {
     "title": "Settings",
