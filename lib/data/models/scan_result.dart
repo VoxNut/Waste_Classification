@@ -15,6 +15,15 @@ class ScanResult {
   final String modelLabel;
   final double confidence;
 
+  factory ScanResult.fromMap(Map<String, Object?> map) => ScanResult(
+    id: map['id']! as String,
+    imagePath: map['image_path']! as String,
+    scannedAt: DateTime.parse(map['scanned_at']! as String).toLocal(),
+    categoryId: map['category_id']! as String,
+    modelLabel: map['model_label']! as String,
+    confidence: (map['confidence']! as num).toDouble(),
+  );
+
   Map<String, Object?> toMap() => {
     'id': id,
     'image_path': imagePath,

@@ -11,7 +11,7 @@ abstract final class AppConfig {
     defaultValue: 'https://nonelliptic-dewily-carlos.ngrok-free.dev',
   );
 
-  static const String appVersion = '1.0.5';
+  static const String appVersion = '1.1.0';
 
   static ClassifierMode get classifierMode {
     if (_mode.toLowerCase() == 'api' && apiBaseUrl.trim().isNotEmpty) {

@@ -1,5 +1,9 @@
 {
   "app_name": "Waste Classification",
+  "navigation": {
+    "home": "Trang chủ",
+    "history": "Lịch sử"
+  },
   "common": {
     "back": "Quay lại",
     "home": "Trang chủ",
@@ -52,6 +56,24 @@
     "confidence_value": "Mức tin cậy: {value}%",
     "scan_again": "Quét lại",
     "back_home": "Về trang chủ"
+  },
+  "history": {
+    "title": "Lịch sử",
+    "statistics_title": "Thống kê phân loại",
+    "scan_history_title": "Lịch sử quét",
+    "scan_count": "{count} lần quét",
+    "period_day": "Ngày",
+    "period_week": "Tuần",
+    "period_month": "Tháng",
+    "total_scans": "lần quét",
+    "no_period_data": "Chưa có lần quét nào trong khoảng thời gian này.",
+    "today": "Hôm nay",
+    "yesterday": "Hôm qua",
+    "detail_title": "Chi tiết lần quét",
+    "scanned_at": "Thời gian quét",
+    "empty_title": "Chưa có lịch sử quét",
+    "empty_description": "Hoàn thành lần quét đầu tiên để bắt đầu theo dõi thói quen phân loại rác.",
+    "load_error": "Không thể tải lịch sử quét. Vui lòng thử lại."
   },
   "settings": {
     "title": "Cài đặt",

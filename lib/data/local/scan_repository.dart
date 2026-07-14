@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
 import 'package:waste_classification/data/models/scan_result.dart';
 
 class ScanRepository {
   Database? _database;
+  final ValueNotifier<int> revision = ValueNotifier(0);
 
   Future<Database> get _db async {
     final current = _database;
@@ -44,6 +46,13 @@ class ScanRepository {
       result.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+    revision.value++;
+  }
+
+  Future<List<ScanResult>> getAll() async {
+    final db = await _db;
+    final rows = await db.query('scan_results', orderBy: 'scanned_at DESC');
+    return rows.map(ScanResult.fromMap).toList(growable: false);
   }
 }
 
