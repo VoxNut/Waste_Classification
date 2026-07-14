@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:waste_classification/core/config/app_config.dart';
 import 'package:waste_classification/core/theme/app_colors.dart';
+import 'package:waste_classification/core/widgets/waste_category_icon.dart';
 import 'package:waste_classification/data/seed/waste_categories.dart';
 import 'package:waste_classification/features/scan/scan_screen.dart';
 import 'package:waste_classification/features/settings/settings_screen.dart';
@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                     (category) => Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: _CategoryPreview(
-                        iconAsset: category.iconAsset,
+                        categoryId: category.id,
                         color: category.color,
                         title: category.name(context.locale),
                       ),
@@ -253,12 +253,12 @@ class _ScanHeroCard extends StatelessWidget {
 
 class _CategoryPreview extends StatelessWidget {
   const _CategoryPreview({
-    required this.iconAsset,
+    required this.categoryId,
     required this.color,
     required this.title,
   });
 
-  final String iconAsset;
+  final String categoryId;
   final Color color;
   final String title;
 
@@ -281,7 +281,7 @@ class _CategoryPreview extends StatelessWidget {
               color: color.withValues(alpha: 0.55),
               borderRadius: BorderRadius.circular(14),
             ),
-            child: SvgPicture.asset(iconAsset),
+            child: WasteCategoryIcon(categoryId: categoryId, size: 26),
           ),
           const SizedBox(width: 14),
           Expanded(

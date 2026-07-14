@@ -10,7 +10,6 @@ class WasteCategory {
     required this.disposalInstructionVi,
     required this.disposalInstructionEn,
     required this.colorHex,
-    required this.iconAsset,
   });
 
   final String id;
@@ -21,7 +20,6 @@ class WasteCategory {
   final String disposalInstructionVi;
   final String disposalInstructionEn;
   final String colorHex;
-  final String iconAsset;
 
   String name(Locale locale) => locale.languageCode == 'en' ? nameEn : nameVi;
 

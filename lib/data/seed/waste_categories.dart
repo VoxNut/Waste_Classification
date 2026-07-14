@@ -13,7 +13,6 @@ abstract final class WasteCategories {
     disposalInstructionEn:
         'Remove plastic bags and contaminants. Put it in the organic bin or composting area when available.',
     colorHex: '#A9D8B4',
-    iconAsset: 'assets/icons/organic.svg',
   );
 
   static const recyclable = WasteCategory(
@@ -29,7 +28,6 @@ abstract final class WasteCategories {
     disposalInstructionEn:
         'Rinse away food or liquid residue, let it dry, and place it in the recycling bin.',
     colorHex: '#F2DDA4',
-    iconAsset: 'assets/icons/recyclable.svg',
   );
 
   static const other = WasteCategory(
@@ -45,7 +43,6 @@ abstract final class WasteCategories {
     disposalInstructionEn:
         'Place it in the general waste bin. Take batteries, chemicals, or electronics to a dedicated collection point.',
     colorHex: '#D6D9D5',
-    iconAsset: 'assets/icons/other.svg',
   );
 
   static const all = [organic, recyclable, other];
