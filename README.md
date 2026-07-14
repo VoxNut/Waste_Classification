@@ -18,7 +18,9 @@ Waste Classification is a Flutter Android app built for IT-Challenge II 2026. Th
 
 ## Demo
 
-[Watch the 37-second demo](repo%20images/Demo%20Video.mp4)
+https://github.com/user-attachments/assets/4432e38d-ee5b-4b20-be4b-e816d4c3cab6
+
+[Open the full-resolution demo](repo%20images/Demo%20Video.mp4)
 
 <table>
   <tr>
