@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 import 'package:path/path.dart' as p;
 import 'package:waste_classification/data/models/classification_result.dart';
 import 'package:waste_classification/services/classifier/model_label_mapper.dart';
@@ -69,6 +70,7 @@ class ApiClassifierService implements WasteClassifierService {
           'file',
           imageFile.path,
           filename: p.basename(imageFile.path),
+          contentType: _imageMediaType(imageFile.path),
         ),
       );
 
@@ -107,5 +109,14 @@ class ApiClassifierService implements WasteClassifierService {
         error,
       );
     }
+  }
+
+  MediaType _imageMediaType(String imagePath) {
+    return switch (p.extension(imagePath).toLowerCase()) {
+      '.jpg' || '.jpeg' => MediaType('image', 'jpeg'),
+      '.png' => MediaType('image', 'png'),
+      '.webp' => MediaType('image', 'webp'),
+      _ => MediaType('application', 'octet-stream'),
+    };
   }
 }
