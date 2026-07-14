@@ -7,6 +7,7 @@
 [![Latest release](https://img.shields.io/github/v/release/VoxNut/Waste_Classification?style=flat-square&color=5FA084)](https://github.com/VoxNut/Waste_Classification/releases/latest)
 ![Flutter](https://img.shields.io/badge/Flutter-Android-5FA084?style=flat-square&logo=flutter&logoColor=white)
 ![Classes](https://img.shields.io/badge/model-9_classes-F2DDA4?style=flat-square)
+[![License: GPL v3](https://img.shields.io/github/license/VoxNut/Waste_Classification?style=flat-square&color=5FA084)](LICENSE)
 
 **English** · [Tiếng Việt](README.vi.md)
 
@@ -114,3 +115,7 @@ Scan history is local to the device. In API mode, one cropped image is sent to t
 
 - [Waste classification notebook](https://www.kaggle.com/code/ledainhan/waste-classification)
 - [Waste classification API notebook](https://www.kaggle.com/code/ledainhan/waste-classification-api)
+
+## License
+
+Released under the [GNU General Public License v3.0](LICENSE).

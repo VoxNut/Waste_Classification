@@ -7,6 +7,7 @@
 [![Bản phát hành mới nhất](https://img.shields.io/github/v/release/VoxNut/Waste_Classification?style=flat-square&color=5FA084)](https://github.com/VoxNut/Waste_Classification/releases/latest)
 ![Flutter](https://img.shields.io/badge/Flutter-Android-5FA084?style=flat-square&logo=flutter&logoColor=white)
 ![Số nhãn](https://img.shields.io/badge/model-9_nhãn-F2DDA4?style=flat-square)
+[![Giấy phép: GPL v3](https://img.shields.io/github/license/VoxNut/Waste_Classification?style=flat-square&color=5FA084)](LICENSE)
 
 [English](README.md) · **Tiếng Việt**
 
@@ -114,3 +115,7 @@ Lịch sử quét được lưu trên thiết bị. Ở chế độ API, một �
 
 - [Notebook phân loại rác](https://www.kaggle.com/code/ledainhan/waste-classification)
 - [Notebook API phân loại rác](https://www.kaggle.com/code/ledainhan/waste-classification-api)
+
+## Giấy phép
+
+Dự án được phát hành theo [GNU General Public License v3.0](LICENSE).
