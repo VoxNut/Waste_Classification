@@ -63,6 +63,7 @@ class ApiClassifierService implements WasteClassifierService {
       '${baseUrl.replaceAll(RegExp(r'/+$'), '')}/predict',
     );
     final request = http.MultipartRequest('POST', endpoint)
+      ..headers['ngrok-skip-browser-warning'] = 'true'
       ..files.add(
         await http.MultipartFile.fromPath(
           'file',
