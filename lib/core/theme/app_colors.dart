@@ -4,6 +4,8 @@ abstract final class AppColors {
   static const primary = Color(0xFF8FC9A9);
   static const primaryDark = Color(0xFF5FA084);
   static const primaryLight = Color(0xFFE3F3E9);
+  static const launcherBackground = Color(0xFFDFF3E8);
+  static const launcherFrame = Color(0xFF4F9678);
   static const background = Color(0xFFFAFDFB);
   static const surface = Color(0xFFFFFFFF);
   static const textPrimary = Color(0xFF2B3A32);

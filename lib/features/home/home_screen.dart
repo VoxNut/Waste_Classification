@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:waste_classification/core/config/app_config.dart';
 import 'package:waste_classification/core/theme/app_colors.dart';
+import 'package:waste_classification/core/widgets/app_launcher_icon.dart';
 import 'package:waste_classification/core/widgets/waste_category_icon.dart';
 import 'package:waste_classification/data/seed/waste_categories.dart';
 import 'package:waste_classification/features/scan/scan_screen.dart';
@@ -120,15 +121,7 @@ class _HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          width: 44,
-          height: 44,
-          decoration: BoxDecoration(
-            color: AppColors.primaryLight,
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child: const Icon(Icons.eco_rounded, color: AppColors.primaryDark),
-        ),
+        const AppLauncherIcon(),
         const SizedBox(width: 12),
         Expanded(
           child: Text(
@@ -194,47 +187,18 @@ class _ScanHeroCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 28),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'home.scan_card_title'.tr(),
-                      style: theme.textTheme.headlineMedium,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'home.scan_card_subtitle'.tr(),
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
-                    ),
-                  ],
-                ),
+              Text(
+                'home.scan_card_title'.tr(),
+                style: theme.textTheme.headlineMedium,
               ),
-              const SizedBox(width: 14),
-              Semantics(
-                button: true,
-                label: 'home.scan_action'.tr(),
-                child: InkWell(
-                  onTap: onPressed,
-                  customBorder: const CircleBorder(),
-                  child: Ink(
-                    width: 78,
-                    height: 78,
-                    decoration: const BoxDecoration(
-                      color: AppColors.primaryDark,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.center_focus_strong_rounded,
-                      color: Colors.white,
-                      size: 34,
-                    ),
-                  ),
+              const SizedBox(height: 8),
+              Text(
+                'home.scan_card_subtitle'.tr(),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: AppColors.textSecondary,
                 ),
               ),
             ],
