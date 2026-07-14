@@ -39,6 +39,10 @@ void main() {
         startsWith('multipart/form-data'),
       );
       expect(request.headers['ngrok-skip-browser-warning'], 'true');
+      expect(
+        latin1.decode(request.bodyBytes).toLowerCase(),
+        contains('content-type: image/jpeg'),
+      );
       return http.Response(
         jsonEncode({
           'predicted_class': 'Plastic',
@@ -60,4 +64,39 @@ void main() {
     expect(result.confidence, 0.92);
     expect(result.allProbabilities['Glass'], 0.08);
   });
+
+  for (final format in {
+    'jpeg': 'image/jpeg',
+    'png': 'image/png',
+    'webp': 'image/webp',
+  }.entries) {
+    test(
+      'API classifier sends ${format.key} with the correct MIME type',
+      () async {
+        final formatImage = File(
+          '${temporaryDirectory.path}/sample.${format.key}',
+        );
+        await formatImage.writeAsBytes([1, 2, 3]);
+        final client = MockClient((request) async {
+          expect(
+            latin1.decode(request.bodyBytes).toLowerCase(),
+            contains('content-type: ${format.value}'),
+          );
+          return http.Response(
+            jsonEncode({'predicted_class': 'Metal', 'confidence': 0.8}),
+            200,
+          );
+        });
+        final service = ApiClassifierService(
+          baseUrl: 'https://example.test',
+          client: client,
+        );
+
+        final result = await service.classify(formatImage);
+
+        expect(result.modelLabel, 'Metal');
+        expect(result.categoryId, 'recyclable');
+      },
+    );
+  }
 }
