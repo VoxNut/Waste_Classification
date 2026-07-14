@@ -1,0 +1,110 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart' as p;
+import 'package:waste_classification/data/models/classification_result.dart';
+import 'package:waste_classification/services/classifier/model_label_mapper.dart';
+import 'package:waste_classification/services/classifier/waste_classifier_service.dart';
+
+class ApiClassifierService implements WasteClassifierService {
+  ApiClassifierService({required this.baseUrl, http.Client? client})
+    : _client = client ?? http.Client();
+
+  final String baseUrl;
+  final http.Client _client;
+  static const _timeout = Duration(seconds: 15);
+
+  @override
+  Future<ClassificationResult> classify(File imageFile) async {
+    Object? lastError;
+    for (var attempt = 0; attempt < 2; attempt++) {
+      try {
+        return await _send(imageFile).timeout(_timeout);
+      } on SocketException catch (error) {
+        lastError = error;
+        if (attempt == 1) {
+          throw ClassificationException(
+            ClassificationErrorCode.noConnection,
+            error,
+          );
+        }
+      } on http.ClientException catch (error) {
+        lastError = error;
+        if (attempt == 1) {
+          throw ClassificationException(
+            ClassificationErrorCode.noConnection,
+            error,
+          );
+        }
+      } on TimeoutException catch (error) {
+        lastError = error;
+        if (attempt == 1) {
+          throw ClassificationException(ClassificationErrorCode.timeout, error);
+        }
+      } on ClassificationException {
+        rethrow;
+      } on Object catch (error) {
+        throw ClassificationException(
+          ClassificationErrorCode.unavailable,
+          error,
+        );
+      }
+    }
+    throw ClassificationException(
+      ClassificationErrorCode.unavailable,
+      lastError,
+    );
+  }
+
+  Future<ClassificationResult> _send(File imageFile) async {
+    final endpoint = Uri.parse(
+      '${baseUrl.replaceAll(RegExp(r'/+$'), '')}/predict',
+    );
+    final request = http.MultipartRequest('POST', endpoint)
+      ..files.add(
+        await http.MultipartFile.fromPath(
+          'file',
+          imageFile.path,
+          filename: p.basename(imageFile.path),
+        ),
+      );
+
+    final streamedResponse = await _client.send(request);
+    final response = await http.Response.fromStream(streamedResponse);
+    if (response.statusCode < 200 || response.statusCode >= 300) {
+      throw const ClassificationException(ClassificationErrorCode.unavailable);
+    }
+
+    try {
+      final json = jsonDecode(response.body) as Map<String, dynamic>;
+      final label = json['predicted_class'] as String;
+      final confidence = (json['confidence'] as num)
+          .toDouble()
+          .clamp(0, 1)
+          .toDouble();
+      final rawProbabilities = json['all_probabilities'];
+      final probabilities = rawProbabilities is Map
+          ? rawProbabilities.map(
+              (key, value) =>
+                  MapEntry(key.toString(), (value as num).toDouble()),
+            )
+          : <String, double>{};
+
+      return ClassificationResult(
+        modelLabel: label,
+        categoryId: ModelLabelMapper.categoryIdFor(label),
+        confidence: confidence,
+        allProbabilities: probabilities,
+      );
+    } on ClassificationException {
+      rethrow;
+    } on Object catch (error) {
+      throw ClassificationException(
+        ClassificationErrorCode.invalidResponse,
+        error,
+      );
+    }
+  }
+}

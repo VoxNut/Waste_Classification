@@ -1,0 +1,85 @@
+{
+  "app_name": "Waste Classification",
+  "common": {
+    "back": "Quay lại",
+    "home": "Trang chủ",
+    "try_again": "Thử lại"
+  },
+  "home": {
+    "eyebrow": "Phân loại thông minh",
+    "title": "Quét rác, biết cách xử lý ngay",
+    "subtitle": "Đưa vật thể vào khung hình. AI sẽ nhận diện loại rác và gợi ý cách xử lý phù hợp.",
+    "ai_badge": "Nhận diện bằng AI",
+    "scan_card_title": "Bạn đang có loại rác nào?",
+    "scan_card_subtitle": "Chụp rõ một vật thể trong điều kiện đủ sáng để có kết quả tốt hơn.",
+    "scan_action": "Bắt đầu quét",
+    "categories_title": "Nhóm phân loại",
+    "privacy_note": "Ảnh và kết quả quét được lưu trong vùng dữ liệu riêng của ứng dụng. Ở chế độ demo, ảnh không rời khỏi thiết bị."
+  },
+  "mode": {
+    "demo": "Chế độ demo",
+    "api": "AI trực tuyến"
+  },
+  "scan": {
+    "instruction": "Giữ một vật thể trong khung và chụp thật rõ",
+    "capture": "Chụp để phân loại",
+    "torch": "Đèn pin",
+    "torch_unavailable": "Thiết bị không hỗ trợ bật đèn pin lúc này.",
+    "analyzing": "Đang phân tích...",
+    "analyzing_hint": "AI đang đối chiếu hình ảnh với các nhóm rác. Vui lòng chờ trong giây lát.",
+    "camera_error": "Không thể khởi động camera. Hãy kiểm tra camera của thiết bị và thử lại."
+  },
+  "permissions": {
+    "camera_title": "Cần quyền truy cập camera",
+    "camera_description": "Ứng dụng cần camera để chụp vật thể và phân loại rác. Ảnh chỉ được dùng cho lần phân tích của bạn.",
+    "try_again": "Cấp quyền camera",
+    "open_settings": "Mở cài đặt hệ thống"
+  },
+  "errors": {
+    "title": "Chưa thể phân loại",
+    "no_connection": "Không có kết nối mạng. Vui lòng kiểm tra kết nối và thử lại.",
+    "timeout": "Model phản hồi quá lâu. Vui lòng thử lại với một ảnh khác.",
+    "invalid_response": "Kết quả từ model không đúng định dạng. Vui lòng thử lại sau.",
+    "model_unavailable": "AI đang tạm thời không khả dụng. Hãy chụp lại vật thể rõ hơn hoặc thử lại sau."
+  },
+  "result": {
+    "title": "Kết quả phân loại",
+    "classified_as": "Được nhận diện là",
+    "low_confidence": "Kết quả chưa chắc chắn. Hãy thử lại với góc chụp khác, ánh sáng tốt hơn và chỉ đặt một vật thể trong khung.",
+    "about_title": "Về nhóm rác này",
+    "disposal_title": "Cách xử lý đề xuất",
+    "confidence_title": "Độ tin cậy",
+    "confidence_value": "Mức tin cậy: {value}%",
+    "scan_again": "Quét lại",
+    "back_home": "Về trang chủ"
+  },
+  "settings": {
+    "title": "Cài đặt",
+    "language_section": "Ngôn ngữ",
+    "language_description": "Chọn ngôn ngữ hiển thị cho toàn bộ ứng dụng.",
+    "vietnamese": "Tiếng Việt",
+    "vietnamese_native": "Vietnamese",
+    "english": "Tiếng Anh",
+    "english_native": "English",
+    "ai_section": "AI và quyền riêng tư",
+    "demo_mode_title": "Đang dùng model mô phỏng",
+    "demo_mode_description": "Luồng quét hoạt động đầy đủ để demo. Kết quả được mô phỏng cho đến khi có tệp model ONNX hoặc endpoint ổn định.",
+    "api_mode_title": "Đang dùng Waste Classification API",
+    "api_mode_description": "Ảnh được gửi đến endpoint đã cấu hình chỉ để nhận kết quả phân loại; ứng dụng không dùng dịch vụ lưu trữ đám mây.",
+    "privacy_title": "Dữ liệu của bạn",
+    "privacy_local": "Ảnh, kết quả quét và tùy chọn ngôn ngữ chỉ được lưu trong bộ nhớ riêng của ứng dụng trên thiết bị.",
+    "privacy_api": "Ảnh được gửi đến model để suy luận khi quét. Kết quả và bản sao ảnh trong ứng dụng vẫn được lưu cục bộ trên thiết bị.",
+    "version": "Phiên bản {version}"
+  },
+  "labels": {
+    "cardboard": "Bìa các-tông",
+    "food_organics": "Rác thực phẩm",
+    "glass": "Thủy tinh",
+    "metal": "Kim loại",
+    "miscellaneous_trash": "Rác hỗn hợp",
+    "paper": "Giấy",
+    "plastic": "Nhựa",
+    "textile_trash": "Vải dệt bỏ đi",
+    "vegetation": "Cây cỏ"
+  }
+}
