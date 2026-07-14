@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:camera/camera.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import 'package:waste_classification/core/theme/app_colors.dart';
@@ -10,8 +12,10 @@ import 'package:waste_classification/data/local/local_image_store.dart';
 import 'package:waste_classification/data/local/scan_repository.dart';
 import 'package:waste_classification/data/models/scan_result.dart';
 import 'package:waste_classification/features/result/result_screen.dart';
+import 'package:waste_classification/features/scan/scan_frame_geometry.dart';
 import 'package:waste_classification/services/classifier/classifier_providers.dart';
 import 'package:waste_classification/services/classifier/waste_classifier_service.dart';
+import 'package:waste_classification/services/image/camera_frame_cropper.dart';
 import 'package:waste_classification/services/permission/camera_permission_service.dart';
 
 class ScanScreen extends ConsumerStatefulWidget {
@@ -29,6 +33,7 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
   String? _errorKey;
   bool _initializing = false;
   bool _torchEnabled = false;
+  final GlobalKey _cameraPreviewKey = GlobalKey();
 
   @override
   void initState() {
@@ -144,14 +149,28 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
     }
 
     File? storedImage;
-    setState(() => _state = _ScanViewState.analyzing);
+    File? croppedCapture;
+    ui.Image? previewImage;
     try {
+      final preview = _cameraPreviewKey.currentContext?.findRenderObject();
+      if (preview is! RenderRepaintBoundary || !preview.hasSize) {
+        throw StateError('Camera preview is not available.');
+      }
+      final viewportSize = preview.size;
+      final frameRect = ScanFrameGeometry.frameFor(viewportSize).outerRect;
+      final pixelRatio = View.of(context).devicePixelRatio;
+      setState(() => _state = _ScanViewState.analyzing);
+      previewImage = await preview.toImage(pixelRatio: pixelRatio);
+      croppedCapture = await cameraFrameCropper.cropPreview(
+        image: previewImage,
+        viewportSize: viewportSize,
+        frameRect: frameRect,
+      );
       if (_torchEnabled) {
         await controller.setFlashMode(FlashMode.off);
         _torchEnabled = false;
       }
-      final capture = await controller.takePicture();
-      storedImage = await localImageStore.persist(capture.path);
+      storedImage = await localImageStore.persist(croppedCapture.path);
       final classification = await ref
           .read(classifierServiceProvider)
           .classify(storedImage);
@@ -198,6 +217,18 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
           _errorKey = 'errors.model_unavailable';
         });
       }
+    } finally {
+      previewImage?.dispose();
+      await _deleteTemporaryFile(croppedCapture);
+    }
+  }
+
+  Future<void> _deleteTemporaryFile(File? file) async {
+    if (file == null) return;
+    try {
+      if (await file.exists()) await file.delete();
+    } on FileSystemException {
+      // Cleanup failure must not replace the classification result or error.
     }
   }
 
@@ -232,7 +263,10 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
         fit: StackFit.expand,
         children: [
           if (controller != null && controller.value.isInitialized)
-            _CoverCameraPreview(controller: controller)
+            RepaintBoundary(
+              key: _cameraPreviewKey,
+              child: _CoverCameraPreview(controller: controller),
+            )
           else
             const ColoredBox(
               color: Color(0xFF101713),
@@ -334,16 +368,7 @@ class _CameraShade extends StatelessWidget {
 class _CameraShadePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final frameWidth = size.width - 48;
-    final frameHeight = frameWidth * 1.08;
-    final frame = RRect.fromRectAndRadius(
-      Rect.fromCenter(
-        center: Offset(size.width / 2, size.height * 0.45),
-        width: frameWidth,
-        height: frameHeight,
-      ),
-      const Radius.circular(28),
-    );
+    final frame = ScanFrameGeometry.frameFor(size);
     final overlay = Path()
       ..addRect(Offset.zero & size)
       ..addRRect(frame)
