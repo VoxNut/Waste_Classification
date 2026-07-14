@@ -27,8 +27,9 @@ Waste Classification là ứng dụng Flutter Android được xây dựng cho I
     <td align="center"><img src="repo%20images/result%20screen.jpg" width="230" alt="Kết quả phân loại"><br><sub>Kết quả và cách xử lý</sub></td>
   </tr>
   <tr>
-    <td align="center" colspan="1"><img src="repo%20images/stats.jpg" width="230" alt="Thống kê quét"><br><sub>Thống kê ngày, tuần và tháng</sub></td>
-    <td align="center" colspan="2"><img src="repo%20images/scan%20details.jpg" width="230" alt="Chi tiết lần quét"><br><sub>Chi tiết lần quét đã lưu</sub></td>
+    <td align="center"><img src="repo%20images/stats.jpg" width="230" alt="Thống kê quét"><br><sub>Thống kê ngày, tuần và tháng</sub></td>
+    <td align="center"><img src="repo%20images/scan%20details.jpg" width="230" alt="Chi tiết lần quét"><br><sub>Chi tiết lần quét đã lưu</sub></td>
+    <td align="center"><img src="repo%20images/language.jpg" width="230" alt="Cài đặt ngôn ngữ"><br><sub>Tiếng Việt và tiếng Anh</sub></td>
   </tr>
 </table>
 

@@ -27,8 +27,9 @@ Waste Classification is a Flutter Android app built for IT-Challenge II 2026. Th
     <td align="center"><img src="repo%20images/result%20screen.jpg" width="230" alt="Classification result"><br><sub>Result and disposal advice</sub></td>
   </tr>
   <tr>
-    <td align="center" colspan="1"><img src="repo%20images/stats.jpg" width="230" alt="Scan statistics"><br><sub>Daily, weekly and monthly statistics</sub></td>
-    <td align="center" colspan="2"><img src="repo%20images/scan%20details.jpg" width="230" alt="Saved scan details"><br><sub>Saved scan details</sub></td>
+    <td align="center"><img src="repo%20images/stats.jpg" width="230" alt="Scan statistics"><br><sub>Daily, weekly and monthly statistics</sub></td>
+    <td align="center"><img src="repo%20images/scan%20details.jpg" width="230" alt="Saved scan details"><br><sub>Saved scan details</sub></td>
+    <td align="center"><img src="repo%20images/language.jpg" width="230" alt="Language settings"><br><sub>Vietnamese and English</sub></td>
   </tr>
 </table>
 
