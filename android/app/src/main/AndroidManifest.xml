@@ -13,9 +13,10 @@
         tools:node="remove" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <application
-        android:label="Waste Classification"
+        android:label="Waste AI"
         android:name="${applicationName}"
-        android:icon="@drawable/app_icon">
+        android:icon="@drawable/app_icon"
+        android:roundIcon="@drawable/app_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

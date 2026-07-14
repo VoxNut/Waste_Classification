@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:waste_classification/core/theme/app_colors.dart';
+import 'package:waste_classification/core/widgets/waste_category_icon.dart';
 import 'package:waste_classification/data/models/classification_result.dart';
 import 'package:waste_classification/data/models/scan_result.dart';
 import 'package:waste_classification/data/seed/waste_categories.dart';
@@ -92,7 +92,7 @@ class ResultScreen extends StatelessWidget {
                     color: Colors.white.withValues(alpha: 0.78),
                     borderRadius: BorderRadius.circular(17),
                   ),
-                  child: SvgPicture.asset(category.iconAsset),
+                  child: WasteCategoryIcon(categoryId: category.id, size: 32),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
