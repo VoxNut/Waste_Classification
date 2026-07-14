@@ -67,7 +67,9 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(height: 30),
           Center(
             child: Text(
-              'settings.version'.tr(namedArgs: {'version': '1.0.0'}),
+              'settings.version'.tr(
+                namedArgs: {'version': AppConfig.appVersion},
+              ),
               style: theme.textTheme.bodySmall,
             ),
           ),

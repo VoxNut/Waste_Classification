@@ -38,6 +38,7 @@ void main() {
         request.headers['content-type'],
         startsWith('multipart/form-data'),
       );
+      expect(request.headers['ngrok-skip-browser-warning'], 'true');
       return http.Response(
         jsonEncode({
           'predicted_class': 'Plastic',

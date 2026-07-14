@@ -12,7 +12,7 @@ Mã nguồn đã được đối chiếu trực tiếp với hai notebook Kaggle
 - API: `POST /predict`, multipart field `file`.
 - Phản hồi: `predicted_class`, `confidence`, `all_probabilities`.
 
-Notebook hiện chưa phát hành tệp ONNX hoặc một endpoint cố định. Vì vậy app mặc định dùng `MockClassifierService` để toàn bộ luồng camera → loading → kết quả có thể demo ổn định. Không có token ngrok hoặc URL tạm thời nào được đưa vào repository.
+Ứng dụng mặc định dùng `ApiClassifierService` và gửi ảnh đến endpoint Waste Classification API hiện tại. `MockClassifierService` chỉ được dùng khi chủ động build với `CLASSIFIER_MODE=mock`; kết quả từ mock là dữ liệu mô phỏng, không phải dự đoán của model.
 
 ## Chạy dự án
 
@@ -21,12 +21,17 @@ flutter pub get
 flutter run
 ```
 
-Để dùng API thật:
+Endpoint mặc định có thể được thay thế khi build:
 
 ```bash
 flutter run \
-  --dart-define=CLASSIFIER_MODE=api \
   --dart-define=WASTE_API_BASE_URL=https://your-api.example.com
+```
+
+Để chạy chế độ mô phỏng không gọi mạng:
+
+```bash
+flutter run --dart-define=CLASSIFIER_MODE=mock
 ```
 
 Chỉ cấu hình endpoint do nhóm kiểm soát. Ở chế độ API, ảnh được gửi đến `/predict` để suy luận; ứng dụng không dùng endpoint này làm nơi lưu trữ dữ liệu.
