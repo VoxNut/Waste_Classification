@@ -107,6 +107,12 @@ flutter test
 flutter build apk --release
 ```
 
+Trên Windows, dùng script phát hành đã kiểm chứng để xóa output cũ, chạy toàn bộ kiểm tra, build APK và xác nhận các file dịch cùng font đã được đóng gói:
+
+```powershell
+.\tool\build_release.ps1
+```
+
 ## Dữ liệu và quyền riêng tư
 
 Lịch sử quét được lưu trên thiết bị. Ở chế độ API, một ảnh đã crop được gửi tới endpoint `/predict` để suy luận; ứng dụng không dùng endpoint này làm nơi lưu trữ đám mây. Xóa dữ liệu ứng dụng hoặc gỡ cài đặt có thể làm mất lịch sử cục bộ.
