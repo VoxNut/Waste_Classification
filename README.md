@@ -107,6 +107,12 @@ flutter test
 flutter build apk --release
 ```
 
+On Windows, use the verified release script to clean stale outputs, run all checks, build the APK, and confirm that translations and bundled fonts are present:
+
+```powershell
+.\tool\build_release.ps1
+```
+
 ## Data and privacy
 
 Scan history is local to the device. In API mode, one cropped image is sent to the configured `/predict` endpoint for inference; the app does not use that endpoint as cloud storage. Clearing app data or uninstalling the app may remove local history.
