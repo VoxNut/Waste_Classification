@@ -15,7 +15,9 @@ class ApiClassifierService implements WasteClassifierService {
 
   final String baseUrl;
   final http.Client _client;
-  static const _timeout = Duration(seconds: 15);
+  // A free Hugging Face Space can need extra time for its first request after
+  // sleeping. Keep the retry, but allow each attempt to cover a cold start.
+  static const _timeout = Duration(seconds: 60);
 
   @override
   Future<ClassificationResult> classify(File imageFile) async {
@@ -64,7 +66,6 @@ class ApiClassifierService implements WasteClassifierService {
       '${baseUrl.replaceAll(RegExp(r'/+$'), '')}/predict',
     );
     final request = http.MultipartRequest('POST', endpoint)
-      ..headers['ngrok-skip-browser-warning'] = 'true'
       ..files.add(
         await http.MultipartFile.fromPath(
           'file',

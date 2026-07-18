@@ -59,6 +59,7 @@ The model is served separately from the APK. The current contract follows the pr
 | Input | RGB `224 × 224`, ImageNet normalization |
 | Request | `multipart/form-data`, field name `file` |
 | Response | `predicted_class`, `confidence`, `all_probabilities` |
+| Deployment | [Public Docker Space](https://huggingface.co/spaces/voxnuts947/waste-classification-api) |
 
 The app maps the nine model labels into three practical groups: organic, recyclable, and other waste.
 
@@ -84,7 +85,10 @@ For an offline UI demo without inference:
 flutter run --dart-define=CLASSIFIER_MODE=mock
 ```
 
-The default ngrok URL is useful for the project demo, but it is not a permanent production endpoint.
+Release builds use the project's public Hugging Face Docker Space by default.
+The API source, Dockerfile, tests, and exact ONNX model are kept in
+[`huggingface-space/`](huggingface-space/). Free Spaces can take a short time to
+wake up after being idle, so the app allows for a cold start before retrying.
 
 ## Project map
 
@@ -94,6 +98,8 @@ lib/
 ├── data/       models, SQLite repository, local image storage
 ├── features/   home, camera scan, result, history, settings
 └── services/   API/mock classifiers and camera permission
+
+huggingface-space/  FastAPI, Dockerfile, ONNX model, and backend tests
 ```
 
 Flutter Riverpod selects the classifier implementation. SQLite stores scan metadata, while captured images remain in the app's private directory. `easy_localization` handles the two interface languages, and Be Vietnam Pro is bundled with the app.
