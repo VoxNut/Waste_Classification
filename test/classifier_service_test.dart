@@ -38,7 +38,10 @@ void main() {
         request.headers['content-type'],
         startsWith('multipart/form-data'),
       );
-      expect(request.headers['ngrok-skip-browser-warning'], 'true');
+      expect(
+        request.headers.containsKey('ngrok-skip-browser-warning'),
+        isFalse,
+      );
       expect(
         latin1.decode(request.bodyBytes).toLowerCase(),
         contains('content-type: image/jpeg'),

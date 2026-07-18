@@ -59,6 +59,7 @@ Model được triển khai riêng, không đóng gói trực tiếp trong APK. 
 | Đầu vào | RGB `224 × 224`, chuẩn hóa ImageNet |
 | Request | `multipart/form-data`, tên field `file` |
 | Response | `predicted_class`, `confidence`, `all_probabilities` |
+| Triển khai | [Docker Space công khai](https://huggingface.co/spaces/voxnuts947/waste-classification-api) |
 
 Ứng dụng quy đổi chín nhãn model thành ba nhóm dễ theo dõi: rác hữu cơ, rác tái chế và rác khác.
 
@@ -84,7 +85,11 @@ Nếu chỉ cần demo giao diện, không gọi model:
 flutter run --dart-define=CLASSIFIER_MODE=mock
 ```
 
-Địa chỉ ngrok mặc định thuận tiện cho buổi demo của dự án, nhưng không phải endpoint production cố định.
+Bản phát hành mặc định sử dụng Hugging Face Docker Space công khai của dự án.
+Mã API, Dockerfile, bộ kiểm thử và model ONNX chính xác được lưu trong
+[`huggingface-space/`](huggingface-space/). Space miễn phí có thể mất một lúc để
+khởi động lại sau thời gian không hoạt động, vì vậy ứng dụng chờ cold start rồi
+mới thử lại.
 
 ## Cấu trúc chính
 
@@ -94,6 +99,8 @@ lib/
 ├── data/       model dữ liệu, SQLite và lưu ảnh cục bộ
 ├── features/   trang chủ, camera, kết quả, lịch sử, cài đặt
 └── services/   API/mock classifier và quyền camera
+
+huggingface-space/  FastAPI, Dockerfile, model ONNX và bộ kiểm thử backend
 ```
 
 Riverpod chọn implementation phân loại. SQLite lưu metadata của các lần quét; ảnh nằm trong thư mục riêng của ứng dụng. `easy_localization` quản lý hai ngôn ngữ và font Be Vietnam Pro được đóng gói sẵn, không tải lúc chạy.
