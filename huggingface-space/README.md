@@ -36,4 +36,6 @@ ImageNet mean and standard deviation used during training.
 - [API notebook](https://www.kaggle.com/code/ledainhan/waste-classification-api)
 - [Android application](https://github.com/VoxNut/Waste_Classification)
 
-Model SHA-256: `bc573cb16ab51dad2c239262db1872c8221493b41bf02bcd1efedc9cac3c2f52`
+Current model: Kaggle training notebook version 3.
+
+Model SHA-256: `f6db605cf4a400452479a38f2f85cd095a675f84bf600e82547d01bc66c37447`
