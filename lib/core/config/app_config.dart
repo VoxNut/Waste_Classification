@@ -11,7 +11,7 @@ abstract final class AppConfig {
     defaultValue: 'https://voxnuts947-waste-classification-api.hf.space',
   );
 
-  static const String appVersion = '1.0.9';
+  static const String appVersion = '1.0.10';
 
   static ClassifierMode get classifierMode {
     if (_mode.toLowerCase() == 'api' && apiBaseUrl.trim().isNotEmpty) {
